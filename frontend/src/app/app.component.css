@@ -1,0 +1,15 @@
+/* footer {
+    padding: 10px;
+    background-color: #e8e8ea;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+} */
+div.sticky {
+  background-color: red;
+  position: relative; /* Safari */
+  position: sticky;
+  top: 0;
+}

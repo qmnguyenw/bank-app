@@ -1,0 +1,42 @@
+<div>
+  <br>
+  <h3 class="sticky">List Account</h3>
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Account Number</th>
+        <th scope="col">Balance</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Address</th>
+        <th scope="col">Employer</th>
+        <th scope="col">Email</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+        <th scope="col">Operations </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of collection">
+        <td scope="row"> {{item.account_number}}</td>
+        <td>{{item.balance}}</td>
+        <td>{{item.firstname}} {{item.lastname}}</td>
+        <td>{{item.age}}</td>
+        <td>{{item.gender}}</td>
+        <td>{{item.address}}</td>
+        <td>{{item.employer}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.city}}</td>
+        <td>{{item.state}}</td>
+        <td>
+          &nbsp;
+           <a (click)="deleteAccount(item._id)"> <i  class="fa fa-trash" style="font-size:25px;color:red;"></i></a>&nbsp;&nbsp; 
+           <a routerLink="/updateAccount/{{item._id}}" > <i  class="fa fa-edit" style="font-size:25px;color:blue;"></i>  </a>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
