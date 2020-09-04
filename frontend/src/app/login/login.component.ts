@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
-import {AuthService} from '../auth.service';
+import {AuthenticationService} from '../authentication.service';
 
 
 @Component({
@@ -13,12 +13,12 @@ export class LoginComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl('')
   })
-  constructor(private authserver: AuthService) { }
+  constructor(private authserver: AuthenticationService) { }
 
   ngOnInit() {
   }
   loginUser(){
     console.warn("Component make a login form", this.loginForm.value);
-    this.authserver.loginUser(this.loginForm.value)
+    this.authserver.login(this.loginForm.value)
   }
 }

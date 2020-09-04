@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AccountService {
-  url = 'http://localhost:3000/';
+  url = 'http://127.0.0.1:5000/api';
   constructor(private http: HttpClient) {}
   getListAccount() {
     console.warn('Service get list accounts');

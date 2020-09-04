@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
-import {AuthService} from '../auth.service';
+import {AuthenticationService} from '../authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -14,13 +14,13 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('')
   })
   alert:boolean = false;
-  constructor(private authserver: AuthService) { }
+  constructor(private authserver: AuthenticationService) { }
 
   ngOnInit() {
   }
   registerUser(){
     console.warn("Component make a register form", this.registerForm.value);
-    this.authserver.registerUser(this.registerForm.value).subscribe((result)=>{
+    this.authserver.register(this.registerForm.value).subscribe((result)=>{
       console.warn("New User is: ", result);
       this.alert = true;
     })
