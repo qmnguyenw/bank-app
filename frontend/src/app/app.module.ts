@@ -11,7 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListAccountComponent } from './list-account/list-account.component';
 import { UpdateAccountComponent } from './update-account/update-account.component';
-
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthenticationService } from './authentication.service';
+import { AuthGuardService } from './auth-guard.service';
+import { FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,8 @@ import { UpdateAccountComponent } from './update-account/update-account.componen
     RegisterComponent,
     ListAccountComponent,
     UpdateAccountComponent,
+    HomeComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,9 +35,9 @@ import { UpdateAccountComponent } from './update-account/update-account.componen
     NgbModule.forRoot(),
     HttpClientModule,
     ReactiveFormsModule,
-
+    FormsModule,
   ],
-  providers: [],
+  providers: [AuthenticationService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

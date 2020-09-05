@@ -6,12 +6,15 @@ table {
 
 th {
     position: sticky;
-    top: 105px; /* Don't forget this, required for the stickiness */
+    top: 0px; 
 }
-h3.sticky {
+/* h3.sticky {
     position: relative;
     border-collapse: collapse;
     position: sticky;
     background:white;
-    top: 70px; /* Don't forget this, required for the stickiness */
+    top: 70px; 
+} */
+.pagination {
+    align-items: center;
 }

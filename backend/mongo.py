@@ -71,20 +71,24 @@ def login():
         result = jsonify({"result":"No results found"})
     return result
 
-@app.route('/api/accounts', methods=['GET'])
+@app.route('/api/accounts/<N>', methods=['GET'])
 # @login_required
-def get_all_tasks():
-    accounts = mongo.db.accounts 
+def get_all_accounts(N):
+    N = int(N)
+    accounts = mongo.db.accounts.find()
+    total_number_pages = mongo.db.accounts.count()/50 +1 
+    print("++++++++++++++++",total_number_pages)
     result = []
-    for field in accounts.find():
+    for field in accounts[50*(N-1):50*N-1]:
         result.append({'_id': str(field['_id']), 'account_number': field['account_number'], 'balance': field['balance'],
         'firstname': field['firstname'], 'lastname': field['lastname'], 'age': field['age'], 'gender': field['gender'],
         'address': field['address'],'employer': field['employer'],'email': field['email'],'city': field['city'],
         'state': field['state'], })
-    return jsonify(result)
+
+    return jsonify({"total_number_pages":total_number_pages,"result":result})
 
 @app.route('/api/account', methods=['POST'])
-def add_task():
+def add_account():
     accounts = mongo.db.accounts 
     _json = request.get_json()
     account_number = _json['account_number']
@@ -108,7 +112,7 @@ def add_task():
 
 
 @app.route('/api/account/<id>', methods=['PUT'])
-def update_task(id):
+def update_account(id):
     accounts = mongo.db.accounts 
     _json = request.get_json()
     account_number = _json['account_number']

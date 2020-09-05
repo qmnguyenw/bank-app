@@ -7,9 +7,9 @@
     width: 100%;
 
 } */
-div.sticky {
+/* div.sticky {
   background-color: red;
-  position: relative; /* Safari */
+  position: relative; 
   position: sticky;
   top: 0;
-}
+} */

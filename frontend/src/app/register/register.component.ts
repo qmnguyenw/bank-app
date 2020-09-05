@@ -1,31 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
-import {AuthenticationService} from '../authentication.service';
+import { Component } from '@angular/core'
+import { AuthenticationService, TokenPayload } from '../authentication.service'
+import { Router } from '@angular/router'
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  templateUrl: './register.component.html'
 })
-export class RegisterComponent implements OnInit {
-  registerForm = new FormGroup({
-    username: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl('')
-  })
-  alert:boolean = false;
-  constructor(private authserver: AuthenticationService) { }
+export class RegisterComponent {
+  credentials: TokenPayload = {
+    _id: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: ''
+  }
 
-  ngOnInit() {
-  }
-  registerUser(){
-    console.warn("Component make a register form", this.registerForm.value);
-    this.authserver.register(this.registerForm.value).subscribe((result)=>{
-      console.warn("New User is: ", result);
-      this.alert = true;
-    })
-  }
-  closeAlert(){
-    this.alert = false;
+  constructor(private auth: AuthenticationService, private router: Router) {}
+
+  register() {
+    this.auth.register(this.credentials).subscribe(
+      () => {
+        this.router.navigateByUrl('/login')
+      },
+      err => {
+        console.error(err)
+      }
+    )
   }
 }

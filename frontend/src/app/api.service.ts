@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
   url = 'http://127.0.0.1:5000/api';
   constructor(private http: HttpClient) {}
-  getListAccount() {
+
+  getListAccount(N) {
     console.warn('Service get list accounts');
-    return this.http.get(`${this.url}/accounts`);
+    return this.http.get(`${this.url}/accounts/${N}`);
   }
   saveAccount(data) {
     console.warn('Service Save', data);

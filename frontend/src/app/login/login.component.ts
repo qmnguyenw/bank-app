@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
-import {AuthenticationService} from '../authentication.service';
+import { Component } from '@angular/core'
+import { AuthenticationService, TokenPayload } from '../authentication.service'
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -8,17 +8,35 @@ import {AuthenticationService} from '../authentication.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
-  })
-  constructor(private authserver: AuthenticationService) { }
 
-  ngOnInit() {
+@Component({
+  templateUrl: './login.component.html'
+})
+export class LoginComponent {
+  credentials: TokenPayload = {
+    _id: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: ''
   }
-  loginUser(){
-    console.warn("Component make a login form", this.loginForm.value);
-    this.authserver.login(this.loginForm.value)
+
+  constructor(private auth: AuthenticationService, private router: Router) {}
+
+  login() {
+    if(this.auth.isLoggedIn()){
+      this.router.navigateByUrl('/profile')
+    }
+    else{
+      this.auth.login(this.credentials).subscribe(
+        () => {
+          this.router.navigateByUrl('/profile')
+        },
+        err => {
+          console.error(err)
+        }
+      )
+    }
+   
   }
 }
